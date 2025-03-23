@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Constitutional Rights</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f1eb;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e6a27a;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #e6a27a;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Constitutional Rights</h1>
+  
+  <div id="table-container">Loading CSV data...</div>
+  
+  <a href="index.html" class="back-btn">← Back to Home</a>
+
+  <script>
+    async function loadCSV() {
+      try {
+        const response = await fetch('rights.csv');
+        const csvText = await response.text();
+        const rows = csvText.split('\n').map(row => row.split(','));
+
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        // Headers
+        const headerRow = document.createElement('tr');
+        rows[0].forEach(headerText => {
+          const th = document.createElement('th');
+          th.textContent = headerText.trim();
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Data
+        rows.slice(1).forEach(row => {
+          const tr = document.createElement('tr');
+          row.forEach(cellText => {
+            const td = document.createElement('td');
+            td.textContent = cellText.trim();
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        document.getElementById('table-container').innerHTML = '';
+        document.getElementById('table-container').appendChild(table);
+
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+        document.getElementById('table-container').textContent = 'Failed to load CSV data.';
+      }
+    }
+
+    loadCSV();
+  </script>
+</body>
+</html>

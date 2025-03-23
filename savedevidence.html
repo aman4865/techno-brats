@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyameva Jayate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f8f1eb;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #cc8661;
+        }
+        .evidence-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        .evidence {
+            width: 45%;
+            padding: 20px;
+            border: 2px solid #cc8661;
+            border-radius: 10px;
+            background-color: #f2e4d8;
+        }
+        .evidence h2 {
+            font-size: 1.8em;
+            color: #cc8661;
+        }
+        .evidence-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .evidence-list p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .upload-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #e6a27a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .upload-button:hover {
+            background-color: #cc8661;
+        }
+        .vertical-line {
+            width: 2px; /* Thickness of the vertical line */
+            background-color: #cc8661; /* Color of the vertical line */
+            margin: 0 20px; /* Spacing around the line */
+        }
+    </style>
+</head>
+<body>
+    <h1>Satyameva Jayate</h1>
+    <div class="evidence-section">
+        <!-- Victim's Evidence Section -->
+        <div class="evidence">
+            <h2>Victim’s Evidence</h2>
+            <div class="evidence-list" id="victim-evidence-list">
+                <!-- Victim's evidence will be displayed here -->
+            </div>
+            <a href="victimsevidence.html" class="upload-button">Upload Victim Evidence</a>
+        </div>
+
+        <!-- Vertical Line -->
+        <div class="vertical-line"></div>
+
+        <!-- Charged's Evidence Section -->
+        <div class="evidence">
+            <h2>Charged’s Evidence</h2>
+            <div class="evidence-list" id="charged-evidence-list">
+                <!-- Charged's evidence will be displayed here -->
+            </div>
+            <a href="chargedevidence.html" class="upload-button">Upload Charged Evidence</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to load and display evidence from local storage
+        function loadEvidence() {
+            // Load Victim's Evidence
+            const victimEvidence = JSON.parse(localStorage.getItem('victimEvidence')) || [];
+            const victimList = document.getElementById('victim-evidence-list');
+            victimList.innerHTML = victimEvidence.map(evidence => `<p>${evidence}</p>`).join('');
+
+            // Load Charged's Evidence
+            const chargedEvidence = JSON.parse(localStorage.getItem('chargedEvidence')) || [];
+            const chargedList = document.getElementById('charged-evidence-list');
+            chargedList.innerHTML = chargedEvidence.map(evidence => `<p>${evidence}</p>`).join('');
+        }
+
+        // Load evidence when the page loads
+        window.onload = loadEvidence;
+    </script>
+</body>
+</html>

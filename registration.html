@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f1eb;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #f2e4d8;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: auto;
+        }
+
+        .slogan {
+            color: #cc8661;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: #f2e4d8;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 40px;
+            width: 40%;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #cc8661;
+            font-weight: bold;
+        }
+
+        .input-box {
+            display: block;
+            width: 90%;
+            padding: 12px;
+            margin: 10px auto;
+            border: 1px solid #cc8661;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #fdf7f3; /* Unclickable look */
+            border: 2px solid #cc8661;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            transition: 0.3s;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #e6a27a;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #cc8661;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background-color: #b75e3d;
+        }
+
+        .error-placeholder {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo" class="logo">
+            <span class="slogan">Satyameva Jayate</span>
+        </div>
+        <span class="brand">Techno Brats</span>
+    </div>
+
+    <div class="container">
+        <a href="courtcases.html" class="back-btn">Back</a>
+
+        <h2>Registration</h2>
+        <input type="text" id="aadhaar" class="input-box" placeholder="Aadhaar Number" maxlength="12">
+        <input type="text" id="fullname" class="input-box" placeholder="Full Name">
+        <input type="text" id="mobile" class="input-box" placeholder="Mobile Number" maxlength="10">
+        <input type="text" id="address" class="input-box" placeholder="Address">
+        <input type="password" id="password" class="input-box" placeholder="Create Password">
+
+        <a href="#" id="createAccount" class="btn">Create Account</a>
+
+        <div class="login-link">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+
+    <script>
+        const aadhaar = document.getElementById('aadhaar');
+        const fullname = document.getElementById('fullname');
+        const mobile = document.getElementById('mobile');
+        const address = document.getElementById('address');
+        const password = document.getElementById('password');
+        const createAccount = document.getElementById('createAccount');
+
+        function validateForm() {
+            let isValid = true;
+            const fields = [aadhaar, fullname, mobile, address, password];
+
+            fields.forEach(field => {
+                if (field.value.trim() === "" || 
+                    (field.id === "aadhaar" && (field.value.length !== 12 || !/^\d+$/.test(field.value))) ||
+                    (field.id === "mobile" && (field.value.length !== 10 || !/^\d+$/.test(field.value)))) {
+
+                    field.classList.add("error-placeholder"); // Make placeholder text red
+                    const originalPlaceholder = field.placeholder;
+                    field.placeholder = "Required!"; 
+
+                    setTimeout(() => {
+                        field.classList.remove("error-placeholder");
+                        field.placeholder = originalPlaceholder;
+                    }, 1000); // Reset after 1 second
+
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        createAccount.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent immediate redirect
+
+            if (validateForm()) {
+                window.location.href = "login.html"; // Redirect only if valid
+            }
+        });
+    </script>
+
+</body>
+</html>

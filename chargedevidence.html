@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charged Evidence</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9d6c5;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+            border-bottom: 3px solid #cc8661;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: auto;
+        }
+
+        .slogan {
+            color: #cc8661;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-container {
+            margin-top: 40px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #b07550;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* Button Styling */
+        .button {
+            background-color: #cc8661;
+            border: none;
+            border-radius: 20px;
+            width: 260px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 15px auto;
+            display: block;
+        }
+
+        .button:hover {
+            background-color: #b07550;
+        }
+
+        /* Hidden File Input */
+        .file-input {
+            display: none;
+        }
+
+        /* Input Styling */
+        .input-field {
+            width: 240px;
+            height: 45px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px auto;
+            display: block;
+            background-color: white;
+        }
+
+        /* File Name Display */
+        .file-name {
+            font-size: 16px;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background-color: #cc8661;
+            border-radius: 25px;
+            width: 180px;
+            height: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            background-color: #b07550;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background-color: #8a6f5a;
+            border-radius: 20px;
+            width: 180px;
+            height: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #6a5140;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo" class="logo">
+            <span class="slogan">Satyameva Jayate</span>
+        </div>
+        <span class="brand">Techno Brats</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h2>Charged Evidence</h2>
+
+        <!-- Upload Document Button -->
+        <button class="button" onclick="document.getElementById('documentInput').click()">Upload Document</button>
+        <input type="file" id="documentInput" class="file-input" accept=".pdf,.doc,.docx,.txt" onchange="displayFileName('documentInput', 'documentName')">
+        <div class="file-name" id="documentName"></div>
+
+        <!-- Upload Photo Button -->
+        <button class="button" onclick="document.getElementById('photoInput').click()">Upload Photo</button>
+        <input type="file" id="photoInput" class="file-input" accept="image/*" onchange="displayFileName('photoInput', 'photoName')">
+        <div class="file-name" id="photoName"></div>
+
+        <!-- Court Case Number Input -->
+        <input type="text" class="input-field" placeholder="Court Case Number">
+
+        <!-- Submit Button -->
+        <button class="submit-btn" onclick="submitEvidence()">Submit</button>
+
+        <!-- Back Button -->
+        <button class="back-btn" onclick="history.back()">⬅ Back</button>
+    </div>
+
+    <script>
+        function displayFileName(inputId, displayId) {
+            var input = document.getElementById(inputId);
+            var display = document.getElementById(displayId);
+            if (input.files.length > 0) {
+                display.textContent = "Selected: " + input.files[0].name;
+            } else {
+                display.textContent = "";
+            }
+        }
+
+        function submitEvidence() {
+            var documentInput = document.getElementById("documentInput");
+            var photoInput = document.getElementById("photoInput");
+            var caseNumber = document.querySelector(".input-field").value;
+
+            if (!documentInput.files.length && !photoInput.files.length) {
+                alert("Please upload at least one document or photo.");
+                return;
+            }
+
+            if (caseNumber.trim() === "") {
+                alert("Please enter the court case number.");
+                return;
+            }
+
+            alert("Evidence submitted successfully!");
+            // You can implement further logic to send data to the server here.
+        }
+    </script>
+
+</body>
+</html>

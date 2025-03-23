@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Case Type</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f1eb;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: auto;
+        }
+
+        .slogan {
+            color: #cc8661;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: #f2e4d8;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #cc8661;
+            font-weight: bold;
+        }
+
+        .justice-scale {
+            width: 250px;
+            margin: 50px auto 30px;
+            display: block;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 30px;
+        }
+
+        .case-btn {
+            background-color: #fdf7f3;
+            border: 2px solid #cc8661;
+            padding: 18px 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            transition: 0.3s;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .case-btn:hover {
+            background-color: #e6a27a;
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo" class="logo"> <!-- Replace with actual logo -->
+            <span class="slogan">Satyameva Jayate</span>
+        </div>
+        <span class="brand">Techno Brats</span>
+    </div>
+
+    <div class="container">
+        <h2>Please select your case type</h2>
+    </div>
+
+    <img src="logo.png" alt="Justice Scale" class="justice-scale"> <!-- Replace with actual image -->
+
+    <div class="buttons-container">
+        <a href="registration.html" class="case-btn">Offensive Case</a>  <!-- Linked to registration.html -->
+        <a href="nonoffensive.html" class="case-btn">Non-Offensive Case</a>  <!-- Linked to non-offensive.html -->
+    </div>
+
+    <!-- Back to Home Button -->
+    <div style="margin-top: 40px;">
+        <a href="index.html" class="case-btn">Back to Home</a>
+    </div>
+
+</body>
+</html>

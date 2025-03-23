@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "second-kite-454414-e1",
+  "private_key_id": "f434a3718dd1a8a1a934ba2031bf13469cc50ccd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCLu6qm3DlNBvpW\nsd0J3bp12vzT3FpLdYKRv2kqAgYsJoPuHxAKcDBSPM305H+D9z4rwLiRdz6H/wEt\n08rCT1sajHEhsLTt6kEHHxwrznne5S1JojMcwTEetYaLr8s6WKmWf+0vnUTG/y/Y\nwNEdOrmNC8PEZsvSzgmjicke9azKnLgdaLovnqCe/exD+hxUYvONT9ckZXksPOtR\nyXDIidsoOlnmAI8rjwQ0LGkZPZqxpBB4DJgHFfDMkXHRQ4crvOWCsd1AXnG3DQQk\nTEIeGXJQIL+mnZw27PBwpHogfdRKba0naGxSf6VvwW2VQxN4nTpmLbCQUvRSgkrl\nydKuTC23AgMBAAECggEADVzzq4R5GGQ38a2N2YEycU3xiuNSYVAKHh0jlghehb9j\nM5UV6CGlhV/aRHbLuReegvmpzQON39yjxLmx9NY4/Ld8pD+tdelGscMoYwoafpYF\nODsCT1gsdebfSKGVum07PrDaQoj0SGGkNkLuXLC+iP4ciT5ZdL4OjuzA5qyRC0lA\nZx7fZns5ZSBJdWRVhcFyEx0Oi6IpFftmb8GOADlfU5PeVmB1i+iOr5TzSN9ORM+v\nhKJqkcvIpmNkxRktbdwUaQPGLZgl9zNQx5fTiWCaMU/2XfEh2A1U7tBdDUx/Lh4+\n19hNI6A6IeZxrzgz8tSQq774JdwF1MbFF+mjO11DOQKBgQC+osOwzCXyQJYxrwyG\nmsoy1nE7g11oW/iKZuQI5/JrDcMlmq06M2qTDtZPpcMT3UcnC0trxJpgAD8OJcN9\nrm+zTzbr3YJHalINz7FWCXOzWNa6+2iim1l+Uv4FspxwurruJpaeRRCvzvlgwfdB\nrnkEvwG7ZtuUl7Njt9SROwhW7wKBgQC7pN4oj0svJAeDdAkOmp3YUhkXpiYzZ2q8\nZ8gwzla3R2iGE92OgXtGo+lQAfcEtgQ49WgE2vxf4OLFremFEP+946kMvNmcJIbY\nEU7CnTBP2VKRbT6ANPwnduf/QcPg+R+0EsPrA9cVuj7d2KGRamDYSaEl6xFQN3HM\n/XHEhhhVuQKBgC9m+ZH0sVrThIVGKa8uvih1+iH6QDe65spDW2B7jGPiQCwRkhFu\nx4lZnyCe7yr5Ur/6pv5dHKXSadtyuHF/9nZ3tAhiRArN/SlCA66JGyP1ay+DZDlK\nt64ZpOB10UCWrfSZ08n3Enck2A2fLYQ/hggQFrYqlV8VeZ3KECksrJ4xAoGAOZzj\nQRzN/slXLTtBVKSQdkyuu54d+IZ2NSbARov0AA4Cv7f1vL1wtj25cwFHcMDaBwsC\nRwtdlaqctgkxu9N+UjVGQEzzm4dzh3+46PQOU1Xsjg42tHKQQSW3EZ6Fn9udqlJg\nqRXiwh8PElpjMRyyY3Yn7laAWFrNrBzdA3QQoLECgYBT3LcLPLKiLz8JrbEtZP/1\nVhe4kV3YOd+aacQxla4f7iTQTOq5hxIID/mIPSJHyiyE66Qb+LIHSkly8hn2WU0S\n6ineeCtaVvLD6+yqQp80Z2sUsX6QpH7zycvi2w1hmBYgjDaRiJNibdQnpwEyoB04\nZhOxXrxh23FRGnXo8BPzQA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "satnaam@second-kite-454414-e1.iam.gserviceaccount.com",
+  "client_id": "115065249145259331141",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/satnaam%40second-kite-454414-e1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

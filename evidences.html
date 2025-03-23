@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Evidence Type</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f1eb;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #f2e4d8;
+            border-radius: 10px;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 52px;
+            height: auto;
+        }
+
+        .slogan {
+            color: #cc8661;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-container {
+            margin-top: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #cc8661;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            margin-top: 40px;
+        }
+
+        .button {
+            background-color: #e6a27a;
+            border-radius: 20px;
+            width: 180px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #cc8661;
+        }
+
+        .button img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .button-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: white;
+        }
+
+        /* Center Logo */
+        .center-logo {
+            margin: 80px 0;
+        }
+
+        .center-logo img {
+            width: 117px;
+            height: auto;
+        }
+
+        /* Show Evidence & Back Button */
+        .bottom-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .show-evidence, .back-button {
+            width: 200px;
+            height: 60px;
+            background-color: #e6a27a;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .show-evidence:hover, .back-button:hover {
+            background-color: #cc8661;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo" class="logo">
+            <span class="slogan">Satyameva Jayate</span>
+        </div>
+        <span class="brand">Techno Brats</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h2>Please choose the type of evidence</h2>
+
+        <div class="button-container">
+            <!-- Victim Evidence -->
+            <a href="victimsevidence.html" class="button">
+                <img src="person.svg" alt="Victim">
+                <span class="button-label">Victim Evidence</span>
+            </a>
+
+            <!-- Center Logo -->
+            <div class="center-logo">
+                <img src="logo.png" alt="Justice Scale">
+            </div>
+
+            <!-- Charged Evidence (Fixed) -->
+            <a href="chargedevidence.html" class="button">
+                <img src="person.svg" alt="Charged">
+                <span class="button-label">Charged Evidence</span>
+            </a>
+        </div>
+
+        <!-- Show Evidence & Back Button -->
+        <div class="bottom-buttons">
+            <a href="savedevidence.html" class="show-evidence">
+                <img src="saved.svg" alt="Folder" style="width: 30px; height: 30px; margin-right: 10px;">
+                Show Evidence
+            </a>
+
+            <div class="back-button" onclick="history.back()">
+                ⬅ Back
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

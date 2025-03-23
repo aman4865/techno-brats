@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyameva Jayate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1eb;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 15%; /* 15% space below the search bar */
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #cc8661;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #e6a27a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #cc8661;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            font-size: 1.8em;
+            color: #cc8661;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .amendments-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            background-color: #f2e4d8;
+            border-radius: 10px;
+        }
+        .amendment {
+            background-color: orange;
+            padding: 15px;
+            border-radius: 5px;
+            width: 300px;
+            flex-shrink: 0;
+            cursor: pointer;
+            position: relative;
+        }
+        .amendment p {
+            margin: 0;
+            font-size: 14px;
+            color: black;
+        }
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .dot {
+            font-size: 24px;
+            color: gray;
+            cursor: pointer;
+        }
+        .dot.active {
+            color: orange;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .search-results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .search-results p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Satyameva Jayate</h1>
+    <div class="subtitle">Techno Brats</div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search your case keywords">
+        <button onclick="searchAmendments()">Search</button>
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results" id="searchResults">
+        <!-- Search results will be displayed here -->
+    </div>
+
+    <!-- Recently Added Amendments -->
+    <div class="section">
+        <h2>Recently Added Amendments</h2>
+        <div class="amendments-container" id="amendmentsContainer">
+            <!-- Amendments will be dynamically added here -->
+        </div>
+        <div class="dots-container" id="dotsContainer">
+            <!-- Dots for navigation will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Do You Know? -->
+    <div class="section">
+        <h2>Do you know?</h2>
+        <p>Interesting facts or information can be displayed here.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        &copy; 2025 Satyameva Jayate. All rights reserved.
+    </div>
+
+    <script>
+        // Example 60-word sentences (replace with your actual content if needed)
+        const sentences = [
+            "Option 1: 104th CAA extending the reservation foe (sc/st)).",
+            "Option 2: 106th CAA for 1/3rd of seats reserved to women in lok sabha .",
+            "Option 3: 103rd CAA ews 10% in education and employment.",
+            "Option 4: 35th CAA [associated state] to sikkim",
+            "Option 5: 36th CAA sikkim was full fleged state.",
+            "Option 6: 16th CAA Empowred the state to rights to freedom of speech.",
+            "Option 7: 15th CAA to enable high court to issue rights to any person",
+            "Option 8: 125th amd bill enhances financial executive power",
+            "Option 9: pharmacy amd bill regulate pharmacy act in india",
+            "Option 10: wafq deals in mangement of wafq properties"
+        ];
+
+        const amendmentsContainer = document.getElementById('amendmentsContainer');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const searchResults = document.getElementById('searchResults');
+        let currentIndex = 0;
+
+        // Function to create amendments and dots
+        function createAmendments() {
+            sentences.forEach((sentence, index) => {
+                // Create amendment box
+                const amendment = document.createElement('div');
+                amendment.className = 'amendment';
+                amendment.innerHTML = `<p>${sentence}</p>`;
+                amendment.addEventListener('click', () => editAmendment(index));
+                amendmentsContainer.appendChild(amendment);
+
+                // Create dot for navigation
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.innerHTML = '●';
+                dot.addEventListener('click', () => jumpToAmendment(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            // Highlight the first dot as active
+            dotsContainer.children[0].classList.add('active');
+        }
+
+        // Function to edit an amendment
+        function editAmendment(index) {
+            const newText = prompt('Edit the amendment:', sentences[index]);
+            if (newText !== null) {
+                sentences[index] = newText;
+                amendmentsContainer.children[index].innerHTML = `<p>${newText}</p>`;
+            }
+        }
+
+        // Function to jump to a specific amendment
+        function jumpToAmendment(index) {
+            currentIndex = index;
+            amendmentsContainer.scrollTo({
+                left: amendmentsContainer.children[index].offsetLeft - amendmentsContainer.offsetLeft,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+
+        // Function to update the active dot
+        function updateDots() {
+            Array.from(dotsContainer.children).forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        // Automatically scroll amendments
+        function autoScroll() {
+            if (currentIndex < sentences.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            jumpToAmendment(currentIndex);
+        }
+
+        // Function to search amendments
+        function searchAmendments() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const results = sentences.filter(sentence => sentence.toLowerCase().includes(searchTerm));
+
+            // Display search results
+            searchResults.innerHTML = results.length > 0
+                ? results.map(result => `<p>${result}</p>`).join('')
+                : `<p>No results found.</p>`;
+        }
+
+        // Initialize amendments and start auto-scroll
+        createAmendments();
+        setInterval(autoScroll, 3000); // Scroll every 3 seconds
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyameva Jayate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1eb;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 15%; /* 15% space below the search bar */
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #cc8661;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #e6a27a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #cc8661;
+        }
+        .search-results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .search-results p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #cc8661;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2e4d8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Satyameva Jayate</h1>
+    <div class="subtitle">Techno Brats</div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search your case keywords">
+        <button onclick="searchData()">Search</button>
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results" id="searchResults">
+        <!-- Search results will be displayed here -->
+    </div>
+
+    <script>
+        let rightsData = [];
+        let fineData = [];
+        let rightsHTMLContent = '';
+        let fineHTMLContent = '';
+
+        // Function to read and parse CSV files
+        async function loadCSVFiles() {
+            // Load rights.csv
+            const rightsResponse = await fetch('rights.csv');
+            const rightsText = await rightsResponse.text();
+            rightsData = parseCSV(rightsText);
+
+            // Load fine.csv
+            const fineResponse = await fetch('fine.csv');
+            const fineText = await fineResponse.text();
+            fineData = parseCSV(fineText);
+        }
+
+        // Function to load HTML files
+        async function loadHTMLFiles() {
+            // Load rights.html
+            const rightsHTMLResponse = await fetch('rights.html');
+            rightsHTMLContent = await rightsHTMLResponse.text();
+
+            // Load fine.html
+            const fineHTMLResponse = await fetch('fine.html');
+            fineHTMLContent = await fineHTMLResponse.text();
+        }
+
+        // Function to parse CSV text into an array of objects
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const headers = lines[0].split(',').map(header => header.trim());
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index].trim();
+                    });
+                    data.push(row);
+                }
+            }
+            return data;
+        }
+
+        // Function to search data
+        function searchData() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const results = [];
+
+            // Search in rights data
+            rightsData.forEach(row => {
+                if (Object.values(row).some(value => value.toLowerCase().includes(searchTerm))) {
+                    results.push({ ...row, Type: 'Rights (CSV)' });
+                }
+            });
+
+            // Search in fine data
+            fineData.forEach(row => {
+                if (Object.values(row).some(value => value.toLowerCase().includes(searchTerm))) {
+                    results.push({ ...row, Type: 'Fine (CSV)' });
+                }
+            });
+
+            // Search in rights.html
+            if (rightsHTMLContent.toLowerCase().includes(searchTerm)) {
+                results.push({
+                    Type: 'Rights (HTML)',
+                    Description: 'Match found in rights.html',
+                    Link: 'rights.html'
+                });
+            }
+
+            // Search in fine.html
+            if (fineHTMLContent.toLowerCase().includes(searchTerm)) {
+                results.push({
+                    Type: 'Fine (HTML)',
+                    Description: 'Match found in fine.html',
+                    Link: 'fine.html'
+                });
+            }
+
+            // Display search results
+            displayResults(results);
+        }
+
+        // Function to display search results
+        function displayResults(results) {
+            const searchResults = document.getElementById('searchResults');
+            if (results.length > 0) {
+                let tableHtml = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Case Number</th>
+                                <th>Description</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                results.forEach(row => {
+                    tableHtml += `
+                        <tr>
+                            <td>${row.Type}</td>
+                            <td>${row['Case Number'] || 'N/A'}</td>
+                            <td>${row.Description}</td>
+                            <td>${row.Link ? `<a href="${row.Link}" target="_blank">View</a>` : 'N/A'}</td>
+                        </tr>
+                    `;
+                });
+                tableHtml += `
+                        </tbody>
+                    </table>
+                `;
+                searchResults.innerHTML = tableHtml;
+            } else {
+                searchResults.innerHTML = `<p>No results found.</p>`;
+            }
+        }
+
+        // Load CSV and HTML files when the page loads
+        window.onload = async () => {
+            await loadCSVFiles();
+            await loadHTMLFiles();
+        };
+    </script>
+</body>
+</html>
