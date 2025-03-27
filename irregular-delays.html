@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judicial Delay Meter with Scrolling Bars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-orange-100 text-gray-900 flex flex-col items-center p-6">
+
+    <!-- Back Button -->
+    <button onclick="goBack()" class="absolute top-4 left-4 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-800">
+        ← Back
+    </button>
+
+    <h1 class="text-4xl font-bold text-orange-600 mb-6">Judicial Delay Meter</h1>
+
+    <!-- Recently Added Amendments Section -->
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full">
+        <h2 class="text-2xl font-semibold text-orange-600 mb-4">Recently Added Amendments</h2>
+        <div class="flex overflow-hidden whitespace-nowrap py-2" id="barsContainer">
+            <!-- Bars will be dynamically added here -->
+        </div>
+        <div class="flex justify-center gap-3 mt-3" id="dotsContainer">
+            <!-- Dots for navigation -->
+        </div>
+    </div>
+
+    <!-- Input Container -->
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-md w-full mt-6">
+        <label for="start-date" class="block font-semibold mb-2">Select Case Start Date:</label>
+        <input type="date" id="start-date" class="w-full p-2 border border-orange-300 rounded-lg mb-4">
+
+        <label for="present-date" class="block font-semibold mb-2">Select Present Date:</label>
+        <input type="date" id="present-date" class="w-full p-2 border border-orange-300 rounded-lg mb-4">
+
+        <button onclick="calculateTime()" class="w-full bg-orange-500 text-white p-2 rounded-lg hover:bg-orange-700">
+            Calculate Time Taken
+        </button>
+    </div>
+
+    <!-- Meter Container -->
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-2xl w-full mt-6">
+        <div class="relative w-full h-10 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 border-2 border-gray-700 rounded-lg">
+            <div id="arrow" class="absolute top-[-10px] left-0 w-0 h-0 border-l-4 border-r-4 border-transparent border-b-8 border-gray-700 transform -translate-x-1/2"></div>
+        </div>
+        <div class="flex justify-between text-sm font-semibold text-gray-700 mt-2">
+            <span>2</span>
+            <span>10</span>
+            <span>20</span>
+            <span>30</span>
+        </div>
+        <div id="message" class="text-center text-lg font-semibold mt-4"></div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function calculateTime() {
+            const startDate = document.getElementById('start-date').value;
+            const presentDate = document.getElementById('present-date').value;
+
+            if (!startDate || !presentDate) {
+                alert('Please select both dates.');
+                return;
+            }
+
+            const start = new Date(startDate);
+            const present = new Date(presentDate);
+
+            if (present < start) {
+                alert('Present date cannot be before the case start date.');
+                return;
+            }
+
+            const daysDiff = Math.floor((present - start) / (1000 * 60 * 60 * 24));
+            let yearsPassed = Math.round(daysDiff / 365);
+
+            if (yearsPassed < 2) yearsPassed = 2;
+            if (yearsPassed > 30) yearsPassed = 30;
+
+            updateMeter(yearsPassed);
+        }
+
+        function updateMeter(value) {
+            const meter = document.querySelector('.relative');
+            const arrow = document.getElementById('arrow');
+            const message = document.getElementById('message');
+
+            const meterWidth = meter.offsetWidth;
+            const minYears = 2;
+            const maxYears = 30;
+            const position = ((value - minYears) / (maxYears - minYears)) * meterWidth;
+
+            arrow.style.left = `${position}px`;
+
+            if (value <= 10) {
+                message.textContent = `Time elapsed: ${value} years. You cannot file against judicial.`;
+                message.className = 'text-green-600 text-lg font-semibold mt-4';
+            } else if (value <= 20) {
+                message.textContent = `Time elapsed: ${value} years. You can file only by legal documentation.`;
+                message.className = 'text-orange-600 text-lg font-semibold mt-4';
+            } else {
+                message.textContent = `Time elapsed: ${value} years. You can file under Article 32 and Article 226.`;
+                message.className = 'text-red-600 text-lg font-semibold mt-4';
+            }
+        }
+
+        const sentences = [
+            "Option 1: 104th CAA extending reservation for SC/ST.",
+            "Option 2: 106th CAA - 1/3rd seats reserved for women in Lok Sabha.",
+            "Option 3: 103rd CAA - 10% EWS reservation in education & jobs.",
+            "Option 4: 35th CAA - Sikkim as an associated state.",
+            "Option 5: 36th CAA - Sikkim becomes a full-fledged state.",
+            "Option 6: 16th CAA - State's rights to freedom of speech.",
+            "Option 7: 15th CAA - High Court's power to issue rights.",
+            "Option 8: 125th Amendment - Financial & executive power.",
+            "Option 9: Pharmacy Amendment - Regulating Pharmacy Act in India.",
+            "Option 10: Waqf Amendment - Management of Waqf properties."
+        ];
+
+        const barsContainer = document.getElementById('barsContainer');
+        const dotsContainer = document.getElementById('dotsContainer');
+        let currentIndex = 0;
+
+        sentences.forEach((sentence, index) => {
+            const bar = document.createElement('div');
+            bar.className = 'flex-none w-60 h-8 bg-orange-400 text-black text-sm flex items-center px-2 rounded-lg cursor-pointer mx-1';
+            bar.textContent = sentence;
+            bar.addEventListener('click', () => editSentence(index));
+            barsContainer.appendChild(bar);
+
+            const dot = document.createElement('span');
+            dot.className = 'text-lg text-gray-500 cursor-pointer';
+            dot.textContent = '●';
+            dot.addEventListener('click', () => jumpToBar(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        dotsContainer.children[0].classList.add('text-orange-500');
+
+        function autoScroll() {
+            if (currentIndex < sentences.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            jumpToBar(currentIndex);
+        }
+
+        function jumpToBar(index) {
+            currentIndex = index;
+            barsContainer.scrollTo({
+                left: barsContainer.children[index].offsetLeft - barsContainer.offsetLeft,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+
+        function updateDots() {
+            Array.from(dotsContainer.children).forEach((dot, i) => {
+                dot.classList.toggle('text-orange-500', i === currentIndex);
+                dot.classList.toggle('text-gray-500', i !== currentIndex);
+            });
+        }
+
+        function editSentence(index) {
+            const newText = prompt('Edit sentence:', sentences[index]);
+            if (newText) {
+                sentences[index] = newText;
+                barsContainer.children[index].textContent = newText;
+            }
+        }
+
+        setInterval(autoScroll, 3000);
+    </script>
+</body>
+</html>

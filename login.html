@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f1eb;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #f2e4d8; /* Slightly lighter background */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: auto;
+        }
+
+        .slogan {
+            color: #cc8661;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: #f2e4d8;
+            padding: 40px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 20px;
+            width: 400px; /* Increased width */
+            text-align: left;
+        }
+
+        .back-btn {
+            background-color: #e6a27a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #cc8661;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #cc8661;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .forgot-password {
+            text-align: left;
+            font-size: 14px;
+            margin-top: -10px;
+        }
+
+        .forgot-password a {
+            color: #cc8661;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-btn {
+            background-color: #e6a27a;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .register-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-section a {
+            color: #cc8661;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo" class="logo">
+            <span class="slogan">Satyameva Jayate</span>
+        </div>
+        <span class="brand">Techno Brats</span>
+    </div>
+
+    <div class="container">
+        <!-- Back Button Inside the Inner Box -->
+        <a href="courtcases.html" class="back-btn">← Back</a>
+
+        <h2>Login</h2>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" required>
+        </div>
+
+        <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- Login Button -->
+        <button class="login-btn" onclick="validateLogin()">Login</button>
+
+        <div class="register-section">
+            <p>Don't have an account? <a href="registration.html">Register</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validateLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Reset error message
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+
+            // Check if email or password is empty
+            if (email.trim() === '' || password.trim() === '') {
+                errorMessage.textContent = 'Please fill in all fields.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Check if email ends with @gmail.com
+            if (!email.endsWith('@gmail.com')) {
+                errorMessage.textContent = 'Email must end with @gmail.com.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Check if password has at least 8 characters
+            if (password.length < 8) {
+                errorMessage.textContent = 'Password must be at least 8 characters long.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // If all validations pass, redirect to evidences.html
+            window.location.href = 'evidences.html';
+        }
+    </script>
+
+</body>
+</html>

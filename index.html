@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Information Portal</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
+</head>
+<body class="bg-[#f8f1eb] text-gray-800">
+
+    <!-- Top Header -->
+    <div class="flex justify-between items-center px-6 py-3 bg-white shadow-md">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="Logo" class="w-14">
+            <span class="text-xl font-bold text-orange-600">Satyameva Jayate</span>
+        </div>
+        <div class="text-xl font-bold">Techno Brats</div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="flex space-x-6 bg-gray-800 text-white p-4">
+        <a href="#hero" class="hover:text-gray-400">Home</a>
+        <a href="#support" class="hover:text-gray-400">Support</a>
+        <a href="#contact" class="hover:text-gray-400">Contact Us</a>
+        <a href="#" id="about-us" class="hover:text-gray-400">About Us</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="flex flex-col md:flex-row justify-between items-center px-12 py-12 bg-[#f8f1eb]" id="hero">
+        <div class="max-w-lg text-left">
+            <h2 class="text-3xl font-bold">Unite, Educate, Empower:</h2>
+            <p class="text-lg mt-2">Celebrating the Spirit of the Indian Constitution</p>
+            <a href="learn.html" class="bg-orange-400 text-white px-6 py-3 rounded-md mt-4 hover:bg-orange-500 transition inline-block">
+                Learn more
+            </a>
+        </div>
+        <div>
+            <img src="perlimento.jpeg" alt="Indian Parliament" class="w-[550px] rounded-xl">
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="text-center py-12 bg-[#fdf7f3]" id="support">
+        <h2 class="text-2xl font-bold">Civilian Support and Understanding Your Rights</h2>
+        <p class="text-lg text-gray-600 mt-2">Select the option suitable to you.</p>
+        <div class="flex flex-wrap justify-center gap-6 mt-6">
+            <a href="courtcases.html" class="bg-white border-2 border-orange-400 p-5 rounded-xl w-48 text-lg font-bold">
+                <i class="fas fa-folder"></i> Court Cases
+            </a>
+            <a href="fine.html" class="bg-white border-2 border-orange-400 p-5 rounded-xl w-48 text-lg font-bold">
+                <i class="fas fa-file-invoice-dollar"></i> Fines and Penalties
+            </a>
+            <a href="right.html" class="bg-white border-2 border-orange-400 p-5 rounded-xl w-48 text-lg font-bold">
+                <i class="fas fa-gavel"></i> Constitutional Rights
+            </a>
+            <a href="punishment.html" class="bg-white border-2 border-orange-400 p-5 rounded-xl w-48 text-lg font-bold">
+                <i class="fas fa-car-crash"></i> Possible Punishment
+            </a>
+            <a href="irregular-delays.html" class="bg-white border-2 border-orange-400 p-5 rounded-xl w-48 text-lg font-bold">
+                <i class="fas fa-clock"></i> Irregular Delays
+            </a>
+            <a href="aibot.html" class="bg-blue-500 text-white p-5 rounded-xl w-48 text-lg font-bold hover:bg-blue-600 transition">
+                <i class="fas fa-robot"></i> Chatbot
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="text-center py-12 bg-[#fdf7f3]" id="contact">
+        <h2 class="text-2xl font-bold">Contact Us</h2>
+        <p class="text-lg text-gray-600 mt-2">Have questions? Get in touch with us</p>
+        <form action="http://localhost:3000/submit" method="POST" class="flex flex-col w-1/2 mx-auto space-y-4 mt-6">
+            <input type="text" name="name" placeholder="Your Name" required class="p-3 border rounded-md">
+            <input type="email" name="email" placeholder="Your Email" required class="p-3 border rounded-md">
+            <textarea name="message" placeholder="Your Message" required class="p-3 border rounded-md"></textarea>
+            <button type="submit" class="bg-orange-400 text-white px-6 py-3 rounded-md hover:bg-orange-500 transition">
+                Send
+            </button>
+        </form>
+    </section>
+
+    <!-- Overlay -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden" id="thank-you-overlay">
+        <div class="bg-white p-10 rounded-xl text-center w-96">
+            <i class="fas fa-heart text-4xl text-black"></i>
+            <h3 class="text-xl font-bold mt-2">Thank you for your message</h3>
+            <p class="text-gray-600 mt-1">We will help you out soon.</p>
+            <button class="bg-orange-400 text-white px-6 py-2 mt-4 rounded-md hover:bg-orange-500 transition" onclick="closeOverlay()">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // PDF download for About Us
+        document.getElementById('about-us').addEventListener('click', function (e) {
+            e.preventDefault();
+            const pdfUrl = 'about-us.pdf'; // Replace with the actual path to your PDF file
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = 'about-us.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Overlay functionality
+        document.addEventListener("DOMContentLoaded", function () {
+            const sendButton = document.querySelector("button[type='submit']");
+            const overlay = document.getElementById("thank-you-overlay");
+
+            sendButton.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent form submission
+                overlay.classList.remove("hidden"); // Show the overlay
+            });
+        });
+
+        function closeOverlay() {
+            document.getElementById("thank-you-overlay").classList.add("hidden");
+        }
+    </script>
+
+</body>
+</html>

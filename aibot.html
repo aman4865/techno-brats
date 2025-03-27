@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Assistant</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+    <div class="w-96 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="bg-orange-500 text-white text-center p-4 text-lg font-bold relative">
+            <button onclick="goBack()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-orange-500 px-3 py-1 rounded-lg text-sm hover:bg-gray-200">
+                ← Back
+            </button>
+            AI Legal Assistant
+        </div>
+        <div id="chatDisplay" class="p-4 h-96 overflow-y-auto bg-gray-50">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="p-4 flex border-t">
+            <input type="text" id="userInput" class="flex-grow p-2 border rounded-lg" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="ml-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Send</button>
+        </div>
+        <div class="p-4 flex justify-between border-t bg-gray-50">
+            <button onclick="editQuery()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Edit</button>
+            <button onclick="addQuery()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Add</button>
+            <button onclick="deleteQuery()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        const qaData = {
+            "hi": "Hello user, this is your online AI Legal Assistant. How may I help you with your legal queries?",
+            "hello": "Hello user, this is your online AI Legal Assistant. How may I help you with your legal queries?",
+            "contract": "A contract is a legally binding agreement between two or more parties.",
+            "negligence": "Negligence is the failure to take reasonable care, resulting in harm or damage.",
+        };
+
+        function displayMessage(sender, message) {
+            const chatDisplay = document.getElementById("chatDisplay");
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("mb-2", sender === "User" ? "text-blue-600" : "text-gray-600");
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatDisplay.appendChild(messageElement);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+            displayMessage("User", userInput);
+            document.getElementById("userInput").value = "";
+            setTimeout(() => displayMessage("Bot", getBotResponse(userInput)), 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") sendMessage();
+        }
+
+        function getBotResponse(userInput) {
+            return qaData[userInput.toLowerCase()] || "I'm sorry, I don't understand that. Please try another question.";
+        }
+
+        function editQuery() {
+            const query = prompt("Enter the query to edit:");
+            if (!query || !qaData[query]) return alert("Query not found.");
+            const newQuery = prompt("Enter the new query:", query);
+            const newAnswer = prompt("Enter the new answer:", qaData[query]);
+            if (newQuery && newAnswer) {
+                delete qaData[query];
+                qaData[newQuery] = newAnswer;
+                alert("Query updated successfully!");
+            }
+        }
+
+        function addQuery() {
+            const newQuery = prompt("Enter the new query:");
+            if (!newQuery || qaData[newQuery]) return alert("Query already exists.");
+            const newAnswer = prompt("Enter the new answer:");
+            if (newAnswer) {
+                qaData[newQuery] = newAnswer;
+                alert("New query added successfully!");
+            }
+        }
+
+        function deleteQuery() {
+            const query = prompt("Enter the query to delete:");
+            if (!query || !qaData[query]) return alert("Query not found.");
+            if (confirm(`Are you sure you want to delete: "${query}"?`)) {
+                delete qaData[query];
+                alert("Query deleted successfully!");
+            }
+        }
+    </script>
+</body>
+</html>

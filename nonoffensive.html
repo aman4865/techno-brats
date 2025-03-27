@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyameva Jayate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1eb;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #cc8661;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .search-bar {
+            text-align: center;
+            margin-bottom: 15%; /* 15% space below the search bar */
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #cc8661;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #e6a27a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #cc8661;
+        }
+        .search-results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .search-results p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #cc8661;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2e4d8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Satyameva Jayate</h1>
+    <div class="subtitle">Techno Brats</div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search your case keywords">
+        <button onclick="searchData()">Search</button>
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results" id="searchResults">
+        <!-- Search results will be displayed here -->
+    </div>
+
+    <script>
+        // Data for violations and civilian rights
+        const violationsData = [
+            { violation: "Driving without a license", fine: "₹5000", maxFine: "₹5000", punishment: "Possible imprisonment up to 3 months" },
+            { violation: "Driving without insurance", fine: "₹2000 (first offense)", maxFine: "₹4000 (repeat offense)", punishment: "No imprisonment" },
+            { violation: "Drunk driving", fine: "₹10000", maxFine: "₹15000", punishment: "Imprisonment up to 6 months (first offense), 2 years for repeat offense" },
+            { violation: "Over-speeding", fine: "₹1000 (LMV)", maxFine: "₹4000 (HGV)", punishment: "No imprisonment" },
+            { violation: "Rash driving", fine: "₹5000 (first offense)", maxFine: "₹10000", punishment: "Imprisonment for repeat offense" },
+            { violation: "Red light jumping", fine: "₹1000", maxFine: "₹5000", punishment: "License suspension for 3 months" },
+            { violation: "Using mobile while driving", fine: "₹1000 (first offense)", maxFine: "₹10000 (repeat offense)", punishment: "No imprisonment" },
+            { violation: "Riding without helmet", fine: "₹1000", maxFine: "₹1000", punishment: "License suspension for 3 months" },
+            { violation: "Driving without seat belt", fine: "₹1000", maxFine: "₹1000", punishment: "No imprisonment" },
+            { violation: "Minor driving a vehicle", fine: "₹25000", maxFine: "₹25000", punishment: "Vehicle owner may face 3 years in jail" },
+            { violation: "Driving an unregistered vehicle", fine: "₹5000", maxFine: "₹5000", punishment: "Vehicle impounded" },
+            { violation: "Pollution violation", fine: "₹10000", maxFine: "₹10000", punishment: "Suspension of vehicle registration" },
+            { violation: "No vehicle fitness certificate", fine: "₹2000", maxFine: "₹5000", punishment: "No imprisonment" }
+        ];
+
+        const rightsData = [
+            { keyword: "Helmet", right: "Under Section 129 of the Motor Vehicles Act, 1988, it is compulsory for both the driver and the pillion rider of a two-wheeler to wear a helmet." },
+            { keyword: "seatbelt", right: "Section 138 of the Motor Vehicles Act and its amendments mandate that all front-seat passengers (both drivers and passengers) must wear a seatbelt while driving." },
+            { keyword: "drink and drive", right: "Section 185 of the Motor Vehicles Act, 1988 specifically addresses driving under the influence of alcohol or drugs." },
+            // Add more rights as needed
+        ];
+
+        // Function to search data
+        function searchData() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const results = [];
+
+            // Search in violations data
+            violationsData.forEach(row => {
+                if (Object.values(row).some(value => value.toLowerCase().includes(searchTerm))) {
+                    results.push({ ...row, Type: 'Violation' });
+                }
+            });
+
+            // Search in rights data
+            rightsData.forEach(row => {
+                if (Object.values(row).some(value => value.toLowerCase().includes(searchTerm))) {
+                    results.push({ ...row, Type: 'Right' });
+                }
+            });
+
+            // Display search results
+            displayResults(results);
+        }
+
+        // Function to display search results
+        function displayResults(results) {
+            const searchResults = document.getElementById('searchResults');
+            if (results.length > 0) {
+                let tableHtml = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Keyword/Violation</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                results.forEach(row => {
+                    tableHtml += `
+                        <tr>
+                            <td>${row.Type}</td>
+                            <td>${row.violation || row.keyword}</td>
+                            <td>${row.fine ? `Fine: ${row.fine}, Max Fine: ${row.maxFine}, Punishment: ${row.punishment}` : row.right}</td>
+                        </tr>
+                    `;
+                });
+                tableHtml += `
+                        </tbody>
+                    </table>
+                `;
+                searchResults.innerHTML = tableHtml;
+            } else {
+                searchResults.innerHTML = `<p>No results found.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

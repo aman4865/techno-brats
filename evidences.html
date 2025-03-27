@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Evidence Type</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f8f1eb] text-center m-0 p-0">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center px-8 py-4 bg-[#f2e4d8] rounded-lg text-2xl font-bold">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="Logo" class="w-14"> <!-- Replace with actual logo -->
+            <span class="text-[#cc8661] font-bold">Satyameva Jayate</span>
+        </div>
+        <span class="text-2xl font-bold">Techno Brats</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="mt-10">
+        <h2 class="text-3xl font-bold text-[#cc8661] mb-10">Please choose the type of evidence</h2>
+
+        <div class="flex justify-center items-center gap-24">
+            <!-- Victim Evidence -->
+            <a href="victimsevidence.html" class="bg-[#e6a27a] rounded-2xl w-48 h-36 flex flex-col justify-center items-center shadow-lg transition-all duration-300 hover:bg-[#cc8661]">
+                <img src="person.svg" alt="Victim" class="w-16 h-16">
+                <span class="text-white font-bold text-lg mt-2">Victim Evidence</span>
+            </a>
+
+            <!-- Center Logo -->
+            <div class="my-10">
+                <img src="logo.png" alt="Justice Scale" class="w-28">
+            </div>
+
+            <!-- Charged Evidence -->
+            <a href="chargedevidence.html" class="bg-[#e6a27a] rounded-2xl w-48 h-36 flex flex-col justify-center items-center shadow-lg transition-all duration-300 hover:bg-[#cc8661]">
+                <img src="person.svg" alt="Charged" class="w-16 h-16">
+                <span class="text-white font-bold text-lg mt-2">Charged Evidence</span>
+            </a>
+        </div>
+
+        <!-- Show Evidence & Back Button -->
+        <div class="flex justify-center gap-10 mt-10">
+            <a href="savedevidence.html" class="flex items-center bg-[#e6a27a] rounded-2xl w-52 h-14 justify-center shadow-lg transition-all duration-300 hover:bg-[#cc8661] text-white text-lg font-bold">
+                <img src="saved.svg" alt="Folder" class="w-6 h-6 mr-2">
+                Show Evidence
+            </a>
+
+            <button onclick="history.back()" class="bg-[#e6a27a] rounded-2xl w-52 h-14 flex items-center justify-center shadow-lg transition-all duration-300 hover:bg-[#cc8661] text-white text-lg font-bold">
+                ⬅ Back
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>

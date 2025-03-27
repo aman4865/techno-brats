@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charged Evidence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#e9d6c5] text-center">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center px-8 py-4 bg-white border-b-4 border-[#cc8661]">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="Logo" class="w-12">
+            <span class="text-[#cc8661] text-2xl font-bold">Satyameva Jayate</span>
+        </div>
+        <span class="text-2xl font-bold">Techno Brats</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="mt-10">
+        <h2 class="text-3xl font-bold text-[#b07550] mb-6">Charged Evidence</h2>
+
+        <!-- Upload Document Button -->
+        <button class="bg-[#cc8661] text-white font-bold py-3 px-8 rounded-full mb-4 hover:bg-[#b07550]" onclick="document.getElementById('documentInput').click()">
+            Upload Document
+        </button>
+        <input type="file" id="documentInput" class="hidden" accept=".pdf,.doc,.docx,.txt" onchange="displayFileName('documentInput', 'documentName')">
+        <div class="text-lg text-gray-700 mt-1" id="documentName"></div>
+
+        <!-- Upload Photo Button -->
+        <button class="bg-[#cc8661] text-white font-bold py-3 px-8 rounded-full mt-4 mb-4 hover:bg-[#b07550]" onclick="document.getElementById('photoInput').click()">
+            Upload Photo
+        </button>
+        <input type="file" id="photoInput" class="hidden" accept="image/*" onchange="displayFileName('photoInput', 'photoName')">
+        <div class="text-lg text-gray-700 mt-1" id="photoName"></div>
+
+        <!-- Court Case Number Input -->
+        <input type="text" class="w-60 h-12 text-lg font-bold border-2 border-black rounded-lg text-center mt-6 mb-6" placeholder="Court Case Number">
+
+        <!-- Submit Button -->
+        <button class="bg-[#cc8661] text-white text-lg font-bold py-3 px-10 rounded-full hover:bg-[#b07550] mt-4" onclick="submitEvidence()">
+            Submit
+        </button>
+
+        <!-- Back Button -->
+        <button class="bg-[#8a6f5a] text-white text-lg font-bold py-2 px-8 rounded-full hover:bg-[#6a5140] mt-6" onclick="history.back()">
+            ⬅ Back
+        </button>
+    </div>
+
+    <script>
+        function displayFileName(inputId, displayId) {
+            var input = document.getElementById(inputId);
+            var display = document.getElementById(displayId);
+            if (input.files.length > 0) {
+                display.textContent = "Selected: " + input.files[0].name;
+            } else {
+                display.textContent = "";
+            }
+        }
+
+        function submitEvidence() {
+            var documentInput = document.getElementById("documentInput");
+            var photoInput = document.getElementById("photoInput");
+            var caseNumber = document.querySelector("input").value;
+
+            if (!documentInput.files.length && !photoInput.files.length) {
+                alert("Please upload at least one document or photo.");
+                return;
+            }
+
+            if (caseNumber.trim() === "") {
+                alert("Please enter the court case number.");
+                return;
+            }
+
+            alert("Evidence submitted successfully!");
+        }
+    </script>
+
+</body>
+</html>
